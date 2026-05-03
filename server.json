@@ -2,7 +2,7 @@
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
   "name": "io.github.jonathanpchapman/inferventis",
   "title": "Inferventis — Financial Data, News & Web MCP",
-  "description": "Live MCP server: FX rates, stocks, crypto, news headlines, URL reader, Open Banking, payments. x402 micropayments — agents pay $0.001 USDC per call on Base, no account needed.",
+  "description": "Live financial data MCP: FX, crypto, stocks, news, URL reader. x402 on Base: $0.001/call.",
   "version": "1.0.2",
   "repository": {
     "url": "https://github.com/Bankee-ai/inferventis-tools",
