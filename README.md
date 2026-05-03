@@ -1,6 +1,6 @@
 # Inferventis MCP Server
 
-**20 tools for financial data, real-time news, and web content — live on Cloud Run.**
+**9 production tools for financial data, real-time news, and web content — live on Cloud Run.**
 
 Connect any MCP-compatible agent in seconds. No account needed for x402 micropayment mode — agents pay **$0.001 USDC per call** autonomously on Base network.
 
@@ -19,55 +19,35 @@ Connect any MCP-compatible agent in seconds. No account needed for x402 micropay
 
 ## Tools
 
-### Currency & FX
-| Tool | Description |
-|------|-------------|
-| `currency_convert` | Real-time FX conversion via Frankfurter API |
-| `fx_converter` | Multi-source FX with rate comparison |
+All manifests are written to TDQS A standard (≥ 4.0/5.0) for reliable agent selection.
 
-### Stocks & Markets
-| Tool | Description |
-|------|-------------|
-| `finnhub_stock_quote` | Live stock quotes via Finnhub |
-| `stock_tool` | Stock data with intelligent routing |
+### Free — no API key required
 
-### Crypto
 | Tool | Description |
 |------|-------------|
-| `crypto_price` | Live crypto prices via CoinGecko |
-| `crypto_price_basic` | Lightweight crypto price lookup |
+| `currency_convert` | Live FX conversion via Frankfurter (ECB data). 30+ currencies. |
+| `crypto_price` | Live cryptocurrency prices via CoinGecko. 10,000+ coins. |
+| `financial_calculator` | Compound interest, loan payments, ROI, present/future value, break-even. No external API. |
+| `news_headlines` | Real-time headlines from BBC News and The Guardian across 9 topic categories. |
+| `url_reader` | Fetch any public URL and return clean, readable plain text. |
+| `tool_finder` | Semantic search across all available tools — call this first if unsure which tool to use. |
 
-### News & Web
-| Tool | Description |
-|------|-------------|
-| `news_headlines` | Real-time headlines from BBC & Guardian across 9 topic categories |
-| `url_reader` | Fetch any public URL and return clean, readable text |
+### Requires API key (pass via tool arguments)
 
-### Financial Calculators
-| Tool | Description |
-|------|-------------|
-| `financial_calculator` | Compound interest, loan payments, ROI, NPV, IRR |
-| `financial_calculator_basic` | Lightweight financial maths |
-
-### Payments & Banking
-| Tool | Description |
-|------|-------------|
-| `payment_tool` | Stripe payment processing |
-| `open_banking_transactions` | Bank transaction data (Open Banking) |
-
-### Utilities
-| Tool | Description |
-|------|-------------|
-| `tool_finder` | Semantic search across all available tools |
+| Tool | Description | Key needed |
+|------|-------------|------------|
+| `finnhub_stock_quote` | Live stock quotes — price, intraday high/low, % change, sector. | `FINNHUB_API_KEY` |
+| `open_banking_transactions` | Bank account balances and transactions via TrueLayer PSD2. | `TRUELAYER_ACCESS_TOKEN` |
+| `stripe_payments` | Live Stripe data — payments, failed charges, customers, subscriptions. | `STRIPE_SECRET_KEY` |
 
 ## Payment Modes
 
-**x402 micropayments (recommended for agents):**  
-No account. Agent sends `$0.001 USDC` on Base per call, verified on-chain.  
+**x402 micropayments (recommended for autonomous agents):**
+No account. Agent sends `$0.001 USDC` on Base per call, verified on-chain.
 Endpoint: `/mcp-pay`
 
-**API key (for humans / Stripe billing):**  
-Contact for an API key. Standard metered billing via Stripe.  
+**API key (for developers / Stripe billing):**
+Standard metered billing via Stripe.
 Endpoint: `/mcp` with `x-api-key: <key>`
 
 ## Connection Details
@@ -76,10 +56,17 @@ Endpoint: `/mcp` with `x-api-key: <key>`
 |----------|-------|
 | Protocol | MCP Streamable HTTP |
 | Base URL | `https://mcp-server-295985738387.europe-west1.run.app` |
-| MCP endpoint (x402) | `/mcp-pay` |
-| MCP endpoint (API key) | `/mcp` |
+| x402 endpoint | `/mcp-pay` |
+| API key endpoint | `/mcp` |
 | Region | `europe-west1` (Belgium) |
+| MCP Registry | `io.github.jonathanpchapman/inferventis` |
 
-## Status
+## Listings
 
-Live on Google Cloud Run. Uptime monitored. See the [MCP Registry listing](https://registry.modelcontextprotocol.io) for verified status.
+| Platform | Status |
+|----------|--------|
+| MCP Registry | ✅ Live |
+| Smithery | ✅ Indexed |
+| Glama | ✅ Indexed |
+| findmcpservers.com | ✅ Submitted |
+| mcpserverhub.net | ✅ Confirmed |
