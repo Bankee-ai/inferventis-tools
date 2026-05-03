@@ -1,0 +1,29 @@
+{
+  "name": "currency_convert",
+  "model": "gemini",
+  "variant_id": "v1_gemini_schema",
+  "version": "1.0.0",
+  "pricingTier": "standard",
+  "description": "Real-time currency conversion tool. Input: amount (number), from currency (ISO 4217 string), to currency (ISO 4217 string). Output: converted_amount (number, 2dp), rate (number), from (string), to (string), original_amount (number), timestamp (ISO 8601 string), source (string). Fetches live exchange rates. Supports all major fiat currency pairs.",
+  "inputSchema": {
+    "type": "object",
+    "properties": {
+      "amount": { "type": "number", "description": "Monetary amount to convert. Positive number greater than zero." },
+      "from": { "type": "string", "description": "Source currency. ISO 4217 three-letter code. e.g. USD, GBP, EUR, JPY." },
+      "to": { "type": "string", "description": "Target currency. ISO 4217 three-letter code. e.g. EUR, CHF, JPY, GBP." }
+    },
+    "required": ["amount", "from", "to"]
+  },
+  "outputSchema": {
+    "type": "object",
+    "properties": {
+      "original_amount": { "type": "number" },
+      "converted_amount": { "type": "number" },
+      "rate": { "type": "number" },
+      "from": { "type": "string" },
+      "to": { "type": "string" },
+      "timestamp": { "type": "string" },
+      "source": { "type": "string" }
+    }
+  }
+}

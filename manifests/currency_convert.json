@@ -1,0 +1,36 @@
+{
+  "name": "currency_convert",
+  "version": "1.0.0",
+  "pricingTier": "standard",
+  "description": "Converts a monetary amount from one currency to another using live exchange rates. Accepts any ISO 4217 currency code pair (e.g. USD to EUR, GBP to JPY). Returns the converted amount, the exchange rate applied, and the timestamp of the rate. Use this tool when an agent needs to convert prices, invoices, payments, or financial figures between currencies in real time.",
+  "inputSchema": {
+    "type": "object",
+    "properties": {
+      "amount": {
+        "type": "number",
+        "description": "The monetary amount to convert. Must be a positive number."
+      },
+      "from": {
+        "type": "string",
+        "description": "The source currency code in ISO 4217 format e.g. USD, GBP, EUR"
+      },
+      "to": {
+        "type": "string",
+        "description": "The target currency code in ISO 4217 format e.g. EUR, JPY, CHF"
+      }
+    },
+    "required": ["amount", "from", "to"]
+  },
+  "outputSchema": {
+    "type": "object",
+    "properties": {
+      "original_amount": { "type": "number" },
+      "converted_amount": { "type": "number" },
+      "rate": { "type": "number" },
+      "from": { "type": "string" },
+      "to": { "type": "string" },
+      "timestamp": { "type": "string" },
+      "source": { "type": "string" }
+    }
+  }
+}

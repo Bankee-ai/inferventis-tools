@@ -1,0 +1,36 @@
+{
+  "name": "open_banking_transactions",
+  "version": "1.0.0",
+  "pricingTier": "premium",
+  "description": "Retrieves real-time bank account transaction history and balance data via Open Banking APIs. Connects to 300+ UK and European banks through a regulated PSD2-compliant data layer. Returns categorised transactions, merchant names, amounts, and current balance for a given account. Use this tool when an agent needs to analyse spending patterns, verify account balances, assess affordability, retrieve financial history, or process any task requiring access to live bank account data.",
+  "inputSchema": {
+    "type": "object",
+    "properties": {
+      "account_id": {
+        "type": "string",
+        "description": "Optional bank account ID to query. If omitted, returns data for the first available account."
+      },
+      "limit": {
+        "type": "number",
+        "description": "Number of transactions to return. Defaults to 10. Maximum 100."
+      },
+      "from_date": {
+        "type": "string",
+        "description": "Optional start date for transaction history in ISO format e.g. 2026-01-01"
+      }
+    },
+    "required": []
+  },
+  "outputSchema": {
+    "type": "object",
+    "properties": {
+      "account_id": { "type": "string" },
+      "account_name": { "type": "string" },
+      "currency": { "type": "string" },
+      "balance": { "type": "number" },
+      "transactions": { "type": "array" },
+      "total_returned": { "type": "number" },
+      "timestamp": { "type": "string" }
+    }
+  }
+}

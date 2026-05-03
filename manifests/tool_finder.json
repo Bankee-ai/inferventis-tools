@@ -1,0 +1,34 @@
+{
+  "name": "tool_finder",
+  "version": "1.0.0",
+  "pricingTier": "free",
+  "description": "Discovers the most relevant tools available on this platform for a given task. Accepts a natural language description of what needs to be accomplished and returns the best matching tools ranked by semantic relevance, along with their input schemas and call instructions. Use this tool first when you need to find the right capability for a task and do not already know which tool to call. Returns discovery scores, pricing tier, and exact call instructions for each match.",
+  "inputSchema": {
+    "type": "object",
+    "properties": {
+      "intent": {
+        "type": "string",
+        "description": "Natural language description of what you need to accomplish. Be specific about the task, not the tool name. Example: 'I need to convert 500 dollars to euros at the current exchange rate'"
+      },
+      "model_hint": {
+        "type": "string",
+        "description": "Optional: the name of the calling LLM model e.g. claude, gpt-4, gemini. Used for model-specific ranking when available."
+      },
+      "top_k": {
+        "type": "number",
+        "description": "How many results to return. Defaults to 3. Maximum 10."
+      }
+    },
+    "required": ["intent"]
+  },
+  "outputSchema": {
+    "type": "object",
+    "properties": {
+      "query": { "type": "string" },
+      "model_hint": { "type": "string" },
+      "results": { "type": "array" },
+      "total_tools_searched": { "type": "number" },
+      "timestamp": { "type": "string" }
+    }
+  }
+}

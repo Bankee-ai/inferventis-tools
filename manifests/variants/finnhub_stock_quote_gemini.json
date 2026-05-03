@@ -1,0 +1,39 @@
+{
+  "name": "finnhub_stock_quote",
+  "model": "gemini",
+  "variant_id": "v1_gemini_schema",
+  "version": "1.0.0",
+  "pricingTier": "standard",
+  "description": "Real-time stock quote tool powered by Finnhub. Input: symbol (string, required) — exchange ticker in uppercase e.g. AAPL, MSFT, TSLA, GOOGL. include_company_info (boolean, optional, default true) — controls whether company_name, sector, exchange are returned. Output: symbol (string), current_price (number), change (number), change_percent (number), high_today (number), low_today (number), previous_close (number), company_name (string), sector (string), currency (string), timestamp (ISO 8601 string), data_source (string). Live market data for any listed equity.",
+  "inputSchema": {
+    "type": "object",
+    "properties": {
+      "symbol": {
+        "type": "string",
+        "description": "Stock ticker symbol in uppercase e.g. AAPL for Apple, MSFT for Microsoft, TSLA for Tesla, GOOGL for Alphabet. Must be a valid exchange-listed ticker."
+      },
+      "include_company_info": {
+        "type": "boolean",
+        "description": "Whether to include company name, sector and exchange details alongside the price. Defaults to true."
+      }
+    },
+    "required": ["symbol"]
+  },
+  "outputSchema": {
+    "type": "object",
+    "properties": {
+      "symbol": { "type": "string" },
+      "company_name": { "type": "string" },
+      "current_price": { "type": "number" },
+      "change": { "type": "number" },
+      "change_percent": { "type": "number" },
+      "high_today": { "type": "number" },
+      "low_today": { "type": "number" },
+      "previous_close": { "type": "number" },
+      "sector": { "type": "string" },
+      "currency": { "type": "string" },
+      "timestamp": { "type": "string" },
+      "data_source": { "type": "string" }
+    }
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "name": "currency_convert",
+  "model": "mistral",
+  "variant_id": "v1_mistral_enterprise",
+  "version": "1.0.0",
+  "pricingTier": "standard",
+  "description": "Live currency conversion for financial workflows. Converts amounts between any fiat currency pair using real-time interbank rates. Required inputs: amount, source currency (ISO 4217), target currency (ISO 4217). Returns converted amount, applied rate, and timestamp. Suitable for invoicing, payments, and treasury operations.",
+  "inputSchema": {
+    "type": "object",
+    "properties": {
+      "amount": { "type": "number", "description": "Amount to convert. Must be positive." },
+      "from": { "type": "string", "description": "Source currency code. ISO 4217. e.g. USD, GBP, EUR." },
+      "to": { "type": "string", "description": "Target currency code. ISO 4217. e.g. EUR, CHF, JPY." }
+    },
+    "required": ["amount", "from", "to"]
+  },
+  "outputSchema": {
+    "type": "object",
+    "properties": {
+      "original_amount": { "type": "number" },
+      "converted_amount": { "type": "number" },
+      "rate": { "type": "number" },
+      "from": { "type": "string" },
+      "to": { "type": "string" },
+      "timestamp": { "type": "string" }
+    }
+  }
+}

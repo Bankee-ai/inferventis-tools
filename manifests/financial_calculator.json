@@ -1,0 +1,63 @@
+{
+  "name": "financial_calculator",
+  "version": "1.0.0",
+  "pricingTier": "standard",
+  "description": "Performs precise financial calculations across six calculation types. compound_interest computes the final value and total interest earned on a principal over time at a given annual rate. loan_repayment calculates the monthly payment, total repayable amount, and total interest for a mortgage or loan given the loan amount, annual rate, and term in months. roi returns return on investment as a percentage and absolute profit or loss, with optional annualised ROI when a holding period is provided. present_value discounts a future cash amount back to its current value using a discount rate. future_value projects a present amount forward at a compounding annual rate. break_even finds the unit volume and revenue at which fixed and variable costs are fully covered by sales. All calculations are performed locally with no external API dependency.",
+  "inputSchema": {
+    "type": "object",
+    "properties": {
+      "calculator_type": {
+        "type": "string",
+        "description": "The type of financial calculation to perform. One of: compound_interest, loan_repayment, roi, present_value, future_value, break_even."
+      },
+      "principal": {
+        "type": "number",
+        "description": "Starting amount or loan amount in your chosen currency. Used for compound_interest, loan_repayment, and future_value calculations."
+      },
+      "rate": {
+        "type": "number",
+        "description": "Annual interest or discount rate expressed as a percentage. Example: 5 for 5% per year. Used for compound_interest, loan_repayment, present_value, and future_value."
+      },
+      "periods": {
+        "type": "number",
+        "description": "Number of time periods. For compound_interest and future_value: years. For loan_repayment: months. For roi: years used for annualised ROI."
+      },
+      "initial_value": {
+        "type": "number",
+        "description": "Starting value of an investment or asset. Used for roi calculations."
+      },
+      "final_value": {
+        "type": "number",
+        "description": "Ending value of an investment or asset. Used for roi and present_value calculations."
+      },
+      "discount_rate": {
+        "type": "number",
+        "description": "Annual discount rate as a percentage for present value calculations. Represents the required rate of return or cost of capital."
+      },
+      "future_amount": {
+        "type": "number",
+        "description": "The target future cash amount to discount back to present value. Used for present_value calculations."
+      },
+      "fixed_costs": {
+        "type": "number",
+        "description": "Total fixed costs of the business or project that do not vary with output volume. Used for break_even calculations."
+      },
+      "variable_cost_per_unit": {
+        "type": "number",
+        "description": "The variable cost incurred for each unit produced or sold. Used for break_even calculations."
+      },
+      "price_per_unit": {
+        "type": "number",
+        "description": "The selling price per unit of product or service. Used for break_even calculations."
+      }
+    },
+    "required": ["calculator_type"]
+  },
+  "outputSchema": {
+    "type": "object",
+    "properties": {
+      "calculator_type": { "type": "string" },
+      "formula": { "type": "string" }
+    }
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "name": "financial_calculator",
+  "model": "gemini",
+  "variant_id": "v1_gemini_schema",
+  "version": "1.0.0",
+  "pricingTier": "standard",
+  "description": "Local financial calculation tool covering six modes. Input: calculator_type (string, required) — one of: compound_interest, loan_repayment, roi, present_value, future_value, break_even. Conditional numeric inputs by mode — compound_interest: principal, rate (annual %), periods (years). loan_repayment: principal (loan amount), rate (annual %), periods (months). roi: initial_value, final_value, optional periods (years). present_value: future_amount, discount_rate (%), periods (years). future_value: principal, rate (%), periods (years). break_even: fixed_costs, variable_cost_per_unit, price_per_unit. Output: calculator_type (string), result values (numbers), formula (string), full breakdown object. Pure local computation, no external API call.",
+  "inputSchema": {
+    "type": "object",
+    "properties": {
+      "calculator_type": {
+        "type": "string",
+        "description": "The type of financial calculation to perform. One of: compound_interest, loan_repayment, roi, present_value, future_value, break_even."
+      },
+      "principal": { "type": "number", "description": "Starting amount or loan amount in your chosen currency. Used for compound_interest, loan_repayment, and future_value calculations." },
+      "rate": { "type": "number", "description": "Annual interest or discount rate expressed as a percentage. Example: 5 for 5% per year." },
+      "periods": { "type": "number", "description": "Number of time periods. For compound_interest and future_value: years. For loan_repayment: months." },
+      "initial_value": { "type": "number", "description": "Starting value of an investment or asset. Used for roi calculations." },
+      "final_value": { "type": "number", "description": "Ending value of an investment or asset. Used for roi and present_value calculations." },
+      "discount_rate": { "type": "number", "description": "Annual discount rate as a percentage for present value calculations." },
+      "future_amount": { "type": "number", "description": "The target future cash amount to discount back to present value." },
+      "fixed_costs": { "type": "number", "description": "Total fixed costs that do not vary with output volume. Used for break_even." },
+      "variable_cost_per_unit": { "type": "number", "description": "Variable cost incurred per unit produced or sold. Used for break_even." },
+      "price_per_unit": { "type": "number", "description": "Selling price per unit of product or service. Used for break_even." }
+    },
+    "required": ["calculator_type"]
+  },
+  "outputSchema": {
+    "type": "object",
+    "properties": {
+      "calculator_type": { "type": "string" },
+      "formula": { "type": "string" }
+    }
+  }
+}

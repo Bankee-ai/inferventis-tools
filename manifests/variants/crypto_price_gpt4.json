@@ -1,0 +1,38 @@
+{
+  "name": "crypto_price",
+  "model": "gpt4",
+  "variant_id": "v1_gpt4_action",
+  "version": "1.0.0",
+  "pricingTier": "standard",
+  "description": "Look up live cryptocurrency prices from CoinGecko. Returns current price, 24h change percentage, market cap, and trading volume for Bitcoin, Ethereum, Solana, or any listed coin. Call this function to get a crypto price, check portfolio value, monitor market performance, or convert a digital asset holding to fiat. Accepts coin name or ticker symbol (BTC, ETH, SOL, XRP, ADA, DOGE).",
+  "inputSchema": {
+    "type": "object",
+    "properties": {
+      "coin": {
+        "type": "string",
+        "description": "Coin name or ticker symbol. e.g. bitcoin, BTC, ethereum, ETH, solana, SOL."
+      },
+      "currency": {
+        "type": "string",
+        "description": "Target fiat currency. Default USD. e.g. usd, eur, gbp."
+      },
+      "include_market_data": {
+        "type": "boolean",
+        "description": "Include market cap and 24h volume. Default true."
+      }
+    },
+    "required": ["coin"]
+  },
+  "outputSchema": {
+    "type": "object",
+    "properties": {
+      "coin_id": { "type": "string" },
+      "currency": { "type": "string" },
+      "price": { "type": "number" },
+      "change_24h_pct": { "type": "number" },
+      "market_cap": { "type": "number" },
+      "volume_24h": { "type": "number" },
+      "last_updated": { "type": "string" }
+    }
+  }
+}

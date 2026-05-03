@@ -1,0 +1,32 @@
+{
+  "name": "stripe_payments",
+  "model": "gpt4",
+  "variant_id": "v1_gpt4_action",
+  "version": "1.0.0",
+  "pricingTier": "premium",
+  "description": "Retrieve live payment data from Stripe. Fetches payment intents, failed charges, customer records, or subscription status via the Stripe API. Call this function to investigate payment failures, audit transactions, check customer billing history, or monitor subscription status across a Stripe account. Specify query_type to select the data category.",
+  "inputSchema": {
+    "type": "object",
+    "properties": {
+      "query_type": {
+        "type": "string",
+        "description": "Data category to fetch: recent_payments, failed_charges, customers, or subscriptions."
+      },
+      "limit": {
+        "type": "number",
+        "description": "Number of records to return. Default 10, max 25."
+      }
+    },
+    "required": ["query_type"]
+  },
+  "outputSchema": {
+    "type": "object",
+    "properties": {
+      "query_type": { "type": "string" },
+      "records": { "type": "array" },
+      "total_returned": { "type": "number" },
+      "data_source": { "type": "string" },
+      "timestamp": { "type": "string" }
+    }
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "name": "stripe_payments",
+  "model": "gemini",
+  "variant_id": "v1_gemini_schema",
+  "version": "1.0.0",
+  "pricingTier": "premium",
+  "description": "Stripe payment data retrieval tool. Input: query_type (string, required) — one of: recent_payments, failed_charges, customers, subscriptions. limit (number, optional, default 10, max 25). Output: records (array of payment objects), query_type (string), total_returned (number), data_source (string), timestamp (ISO 8601 string). Connects directly to Stripe API. Returns live payment intent, charge failure, customer, and subscription data.",
+  "inputSchema": {
+    "type": "object",
+    "properties": {
+      "query_type": {
+        "type": "string",
+        "description": "Type of Stripe data to retrieve. Accepted values: recent_payments, failed_charges, customers, subscriptions."
+      },
+      "limit": {
+        "type": "number",
+        "description": "Number of records to return. Defaults to 10. Maximum 25."
+      }
+    },
+    "required": ["query_type"]
+  },
+  "outputSchema": {
+    "type": "object",
+    "properties": {
+      "query_type": { "type": "string" },
+      "records": { "type": "array" },
+      "total_returned": { "type": "number" },
+      "data_source": { "type": "string" },
+      "timestamp": { "type": "string" }
+    }
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "name": "financial_calculator",
+  "model": "mistral",
+  "variant_id": "v1_mistral_enterprise",
+  "version": "1.0.0",
+  "pricingTier": "standard",
+  "description": "Local financial calculator for investment and business computations. Supports six modes: compound_interest, loan_repayment, roi, present_value, future_value, break_even. Provide calculator_type plus relevant inputs (principal, rate, periods, etc.). Returns computed result with formula and full numeric breakdown. Zero external API dependency. Suitable for financial planning, loan and mortgage assessment, investment return analysis, and business viability workflows.",
+  "inputSchema": {
+    "type": "object",
+    "properties": {
+      "calculator_type": {
+        "type": "string",
+        "description": "The type of financial calculation to perform. One of: compound_interest, loan_repayment, roi, present_value, future_value, break_even."
+      },
+      "principal": { "type": "number", "description": "Starting amount or loan amount. Used for compound_interest, loan_repayment, future_value." },
+      "rate": { "type": "number", "description": "Annual interest or discount rate as a percentage. e.g. 5 for 5%." },
+      "periods": { "type": "number", "description": "Time periods. Years for compound_interest and future_value; months for loan_repayment." },
+      "initial_value": { "type": "number", "description": "Starting investment value. Used for roi." },
+      "final_value": { "type": "number", "description": "Ending investment value. Used for roi and present_value." },
+      "discount_rate": { "type": "number", "description": "Annual discount rate percentage for present_value." },
+      "future_amount": { "type": "number", "description": "Future cash amount to discount to present value." },
+      "fixed_costs": { "type": "number", "description": "Total fixed costs. Used for break_even." },
+      "variable_cost_per_unit": { "type": "number", "description": "Variable cost per unit sold. Used for break_even." },
+      "price_per_unit": { "type": "number", "description": "Selling price per unit. Used for break_even." }
+    },
+    "required": ["calculator_type"]
+  },
+  "outputSchema": {
+    "type": "object",
+    "properties": {
+      "calculator_type": { "type": "string" },
+      "formula": { "type": "string" }
+    }
+  }
+}

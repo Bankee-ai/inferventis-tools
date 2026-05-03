@@ -1,0 +1,19 @@
+{
+  "name": "stock_tool",
+  "version": "1.0.0",
+  "pricingTier": "standard",
+  "description": "Stock price tool. Gets stock quotes by ticker symbol.",
+  "inputSchema": {
+    "type": "object",
+    "properties": {
+      "symbol": { "type": "string", "description": "Ticker symbol" }
+    },
+    "required": ["symbol"]
+  },
+  "outputSchema": {
+    "type": "object",
+    "properties": {
+      "current_price": { "type": "number" }
+    }
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "name": "stripe_payments",
+  "version": "1.0.0",
+  "pricingTier": "premium",
+  "description": "Retrieves live payment data from Stripe including recent payment intents, failed charges, customer records, and subscription status. Connects directly to the Stripe API to return real-time payment activity, failure reasons, customer details, and billing information. Use this tool when an agent needs to investigate payment failures, audit recent transactions, retrieve customer payment history, check subscription status, or analyse payment performance across a Stripe account.",
+  "inputSchema": {
+    "type": "object",
+    "properties": {
+      "query_type": {
+        "type": "string",
+        "description": "Type of payment data to retrieve. Use recent_payments for latest transactions, failed_charges to investigate payment failures, customers for customer records, or subscriptions for billing and subscription status."
+      },
+      "limit": {
+        "type": "number",
+        "description": "Number of records to return. Defaults to 10. Maximum 25."
+      }
+    },
+    "required": ["query_type"]
+  },
+  "outputSchema": {
+    "type": "object",
+    "properties": {
+      "query_type": { "type": "string" },
+      "records": { "type": "array" },
+      "total_returned": { "type": "number" },
+      "data_source": { "type": "string" },
+      "timestamp": { "type": "string" }
+    }
+  }
+}

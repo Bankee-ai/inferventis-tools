@@ -1,0 +1,32 @@
+{
+  "name": "stripe_payments",
+  "model": "claude",
+  "variant_id": "v1_claude_precise",
+  "version": "1.0.0",
+  "pricingTier": "premium",
+  "description": "Retrieves live payment and billing data from a connected Stripe account across four queryable data categories. The query_type parameter selects the category: recent_payments returns the latest payment intents with amounts, status, and currency; failed_charges returns declined transactions with failure codes and decline reasons; customers returns customer records including email, name, and metadata; subscriptions returns billing subscription objects with plan, status, and renewal date. Returns an array of structured records, a total count, and a UTC timestamp. Use this tool when an agent needs to investigate payment failures, audit Stripe transaction history, retrieve customer payment records, or check subscription billing status. Do not use this tool for processing new payments, issuing refunds, or modifying Stripe account data.",
+  "inputSchema": {
+    "type": "object",
+    "properties": {
+      "query_type": {
+        "type": "string",
+        "description": "Type of payment data to retrieve. Use recent_payments for latest transactions, failed_charges to investigate payment failures, customers for customer records, or subscriptions for billing and subscription status."
+      },
+      "limit": {
+        "type": "number",
+        "description": "Number of records to return. Defaults to 10. Maximum 25."
+      }
+    },
+    "required": ["query_type"]
+  },
+  "outputSchema": {
+    "type": "object",
+    "properties": {
+      "query_type": { "type": "string" },
+      "records": { "type": "array" },
+      "total_returned": { "type": "number" },
+      "data_source": { "type": "string" },
+      "timestamp": { "type": "string" }
+    }
+  }
+}

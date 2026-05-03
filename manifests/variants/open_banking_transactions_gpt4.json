@@ -1,0 +1,38 @@
+{
+  "name": "open_banking_transactions",
+  "model": "gpt4",
+  "variant_id": "v1_gpt4_action",
+  "version": "1.0.0",
+  "pricingTier": "premium",
+  "description": "Retrieve real-time bank account transactions and balance via Open Banking. Connects to 300+ UK and European banks through a PSD2-compliant data layer. Returns categorised transactions with merchant names, amounts, dates, and current balance. Call this function to analyse spending patterns, verify balances, assess affordability, or retrieve bank statement data for any connected account.",
+  "inputSchema": {
+    "type": "object",
+    "properties": {
+      "account_id": {
+        "type": "string",
+        "description": "Bank account ID to query. Optional — defaults to first available account."
+      },
+      "limit": {
+        "type": "number",
+        "description": "Number of transactions to return. Default 10, max 100."
+      },
+      "from_date": {
+        "type": "string",
+        "description": "Filter transactions from this date. ISO format e.g. 2026-01-01."
+      }
+    },
+    "required": []
+  },
+  "outputSchema": {
+    "type": "object",
+    "properties": {
+      "account_id": { "type": "string" },
+      "account_name": { "type": "string" },
+      "currency": { "type": "string" },
+      "balance": { "type": "number" },
+      "transactions": { "type": "array" },
+      "total_returned": { "type": "number" },
+      "timestamp": { "type": "string" }
+    }
+  }
+}

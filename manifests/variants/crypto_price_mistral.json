@@ -1,0 +1,38 @@
+{
+  "name": "crypto_price",
+  "model": "mistral",
+  "variant_id": "v1_mistral_enterprise",
+  "version": "1.0.0",
+  "pricingTier": "standard",
+  "description": "Live cryptocurrency price data via CoinGecko. Required: coin name or symbol (bitcoin, BTC, ethereum, ETH, solana, SOL). Optional: currency (default USD). Returns current price, 24h percentage change, market capitalisation, and trading volume. No API key required. Suitable for portfolio valuation, market monitoring, and digital asset reporting workflows.",
+  "inputSchema": {
+    "type": "object",
+    "properties": {
+      "coin": {
+        "type": "string",
+        "description": "Cryptocurrency name or ticker symbol. Accepts common symbols (BTC, ETH, SOL, XRP, ADA, DOGE, MATIC, LINK, AVAX) or full names (bitcoin, ethereum, solana). Case-insensitive."
+      },
+      "currency": {
+        "type": "string",
+        "description": "Target fiat currency code for the price. Defaults to USD. Examples: usd, eur, gbp, jpy, chf, aud, cad."
+      },
+      "include_market_data": {
+        "type": "boolean",
+        "description": "Whether to include market capitalisation and 24-hour trading volume alongside the price. Defaults to true."
+      }
+    },
+    "required": ["coin"]
+  },
+  "outputSchema": {
+    "type": "object",
+    "properties": {
+      "coin_id": { "type": "string" },
+      "currency": { "type": "string" },
+      "price": { "type": "number" },
+      "change_24h_pct": { "type": "number" },
+      "market_cap": { "type": "number" },
+      "volume_24h": { "type": "number" },
+      "last_updated": { "type": "string" }
+    }
+  }
+}

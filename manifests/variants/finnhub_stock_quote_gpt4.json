@@ -1,0 +1,39 @@
+{
+  "name": "finnhub_stock_quote",
+  "model": "gpt4",
+  "variant_id": "v1_gpt4_action",
+  "version": "1.0.0",
+  "pricingTier": "standard",
+  "description": "Fetch real-time stock price quotes from Finnhub. Returns current price, price change, percentage change, intraday high and low, previous close, and optional company details including name, sector, and exchange. Call this function to look up a stock price, monitor portfolio values, or retrieve equity market data for any listed ticker symbol.",
+  "inputSchema": {
+    "type": "object",
+    "properties": {
+      "symbol": {
+        "type": "string",
+        "description": "Ticker symbol in uppercase. e.g. AAPL, MSFT, TSLA, GOOGL."
+      },
+      "include_company_info": {
+        "type": "boolean",
+        "description": "Include company name, sector and exchange. Defaults to true."
+      }
+    },
+    "required": ["symbol"]
+  },
+  "outputSchema": {
+    "type": "object",
+    "properties": {
+      "symbol": { "type": "string" },
+      "company_name": { "type": "string" },
+      "current_price": { "type": "number" },
+      "change": { "type": "number" },
+      "change_percent": { "type": "number" },
+      "high_today": { "type": "number" },
+      "low_today": { "type": "number" },
+      "previous_close": { "type": "number" },
+      "sector": { "type": "string" },
+      "currency": { "type": "string" },
+      "timestamp": { "type": "string" },
+      "data_source": { "type": "string" }
+    }
+  }
+}

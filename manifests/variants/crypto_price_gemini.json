@@ -1,0 +1,39 @@
+{
+  "name": "crypto_price",
+  "model": "gemini",
+  "variant_id": "v1_gemini_schema",
+  "version": "1.0.0",
+  "pricingTier": "standard",
+  "description": "Real-time cryptocurrency price tool powered by CoinGecko. Input: coin (string, required) — coin name or ticker e.g. bitcoin, BTC, ethereum, ETH, solana, SOL, cardano, ADA, dogecoin, DOGE. currency (string, optional, default usd) — target fiat currency code e.g. usd, eur, gbp, jpy. include_market_data (boolean, optional, default true) — controls whether market_cap and volume_24h are returned. Output: price (number), change_24h_pct (number), market_cap (number), volume_24h (number), coin_id (string), coin_input (string), currency (string), last_updated (ISO 8601 string), data_source (string). Covers 10,000+ CoinGecko-listed coins.",
+  "inputSchema": {
+    "type": "object",
+    "properties": {
+      "coin": {
+        "type": "string",
+        "description": "Cryptocurrency name or ticker symbol. Accepts common symbols (BTC, ETH, SOL, XRP, ADA, DOGE, MATIC, LINK, AVAX) or full names (bitcoin, ethereum, solana). Case-insensitive."
+      },
+      "currency": {
+        "type": "string",
+        "description": "Target fiat currency code for the price. Defaults to USD. Examples: usd, eur, gbp, jpy, chf, aud, cad."
+      },
+      "include_market_data": {
+        "type": "boolean",
+        "description": "Whether to include market capitalisation and 24-hour trading volume alongside the price. Defaults to true."
+      }
+    },
+    "required": ["coin"]
+  },
+  "outputSchema": {
+    "type": "object",
+    "properties": {
+      "coin_id": { "type": "string" },
+      "currency": { "type": "string" },
+      "price": { "type": "number" },
+      "change_24h_pct": { "type": "number" },
+      "market_cap": { "type": "number" },
+      "volume_24h": { "type": "number" },
+      "last_updated": { "type": "string" },
+      "data_source": { "type": "string" }
+    }
+  }
+}

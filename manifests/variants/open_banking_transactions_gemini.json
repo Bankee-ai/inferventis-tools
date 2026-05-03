@@ -1,0 +1,38 @@
+{
+  "name": "open_banking_transactions",
+  "model": "gemini",
+  "variant_id": "v1_gemini_schema",
+  "version": "1.0.0",
+  "pricingTier": "premium",
+  "description": "Open Banking transaction retrieval tool. PSD2-compliant, 300+ UK and European banks. Input: account_id (string, optional) — target account ID, defaults to first available. limit (number, optional, default 10, max 100) — controls number of transactions returned. from_date (string, optional, ISO 8601) — filters transactions from this date. Output: account_id (string), account_name (string), currency (string), balance (number), transactions (array of categorised transaction objects), total_returned (number), timestamp (ISO 8601 string). Returns live transaction and balance data.",
+  "inputSchema": {
+    "type": "object",
+    "properties": {
+      "account_id": {
+        "type": "string",
+        "description": "Optional bank account ID to query. If omitted, returns data for the first available account."
+      },
+      "limit": {
+        "type": "number",
+        "description": "Number of transactions to return. Defaults to 10. Maximum 100."
+      },
+      "from_date": {
+        "type": "string",
+        "description": "Optional start date for transaction history in ISO format e.g. 2026-01-01"
+      }
+    },
+    "required": []
+  },
+  "outputSchema": {
+    "type": "object",
+    "properties": {
+      "account_id": { "type": "string" },
+      "account_name": { "type": "string" },
+      "currency": { "type": "string" },
+      "balance": { "type": "number" },
+      "transactions": { "type": "array" },
+      "total_returned": { "type": "number" },
+      "timestamp": { "type": "string" }
+    }
+  }
+}

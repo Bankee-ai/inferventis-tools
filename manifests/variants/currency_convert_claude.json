@@ -1,0 +1,29 @@
+{
+  "name": "currency_convert",
+  "model": "claude",
+  "variant_id": "v1_claude_precise",
+  "version": "1.0.0",
+  "pricingTier": "standard",
+  "description": "Converts a monetary amount from one currency to another using live interbank exchange rates sourced in real time. Accepts any valid ISO 4217 currency code pair. Returns the converted amount rounded to two decimal places, the exact rate applied, the source and target currency codes, the original amount, and a UTC timestamp of the rate. Use this tool when the agent needs to convert a specific monetary value between currencies for invoicing, payments, financial reporting, or international transactions. Do not use this tool for historical rate lookups or cryptocurrency conversion.",
+  "inputSchema": {
+    "type": "object",
+    "properties": {
+      "amount": { "type": "number", "description": "The positive monetary amount to convert. Must be greater than zero." },
+      "from": { "type": "string", "description": "The ISO 4217 source currency code in uppercase. Examples: USD, GBP, EUR, JPY, CHF, SEK." },
+      "to": { "type": "string", "description": "The ISO 4217 target currency code in uppercase. Examples: EUR, JPY, CHF, GBP, USD, NOK." }
+    },
+    "required": ["amount", "from", "to"]
+  },
+  "outputSchema": {
+    "type": "object",
+    "properties": {
+      "original_amount": { "type": "number" },
+      "converted_amount": { "type": "number" },
+      "rate": { "type": "number" },
+      "from": { "type": "string" },
+      "to": { "type": "string" },
+      "timestamp": { "type": "string" },
+      "source": { "type": "string" }
+    }
+  }
+}

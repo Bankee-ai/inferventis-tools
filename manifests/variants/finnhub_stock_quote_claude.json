@@ -1,0 +1,39 @@
+{
+  "name": "finnhub_stock_quote",
+  "model": "claude",
+  "variant_id": "v1_claude_precise",
+  "version": "1.0.0",
+  "pricingTier": "standard",
+  "description": "Retrieves a real-time market data quote for a publicly traded equity using its exchange ticker symbol. Returns current price, intraday high and low, absolute price change, percentage change from prior close, and previous close price. When include_company_info is true, also returns company name, sector, exchange, and trading currency. Data is sourced from Finnhub in real time. Use this tool when an agent needs the current trading price of a listed stock, needs to check intraday performance, or requires company sector and exchange information alongside a live price quote. Do not use this tool for historical price data, options pricing, or unlisted or private securities.",
+  "inputSchema": {
+    "type": "object",
+    "properties": {
+      "symbol": {
+        "type": "string",
+        "description": "Stock ticker symbol in uppercase e.g. AAPL for Apple, MSFT for Microsoft, TSLA for Tesla, GOOGL for Alphabet. Must be a valid exchange-listed ticker."
+      },
+      "include_company_info": {
+        "type": "boolean",
+        "description": "Whether to include company name, sector and exchange details alongside the price. Defaults to true."
+      }
+    },
+    "required": ["symbol"]
+  },
+  "outputSchema": {
+    "type": "object",
+    "properties": {
+      "symbol": { "type": "string" },
+      "company_name": { "type": "string" },
+      "current_price": { "type": "number" },
+      "change": { "type": "number" },
+      "change_percent": { "type": "number" },
+      "high_today": { "type": "number" },
+      "low_today": { "type": "number" },
+      "previous_close": { "type": "number" },
+      "sector": { "type": "string" },
+      "currency": { "type": "string" },
+      "timestamp": { "type": "string" },
+      "data_source": { "type": "string" }
+    }
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "name": "open_banking_transactions",
+  "model": "mistral",
+  "variant_id": "v1_mistral_enterprise",
+  "version": "1.0.0",
+  "pricingTier": "premium",
+  "description": "Live bank account transaction and balance data via Open Banking APIs. PSD2-compliant, covers 300+ UK and European banks. Optional inputs: account_id, limit (max 100), from_date. Returns categorised transactions with merchant data, amounts, and current balance. Suitable for affordability assessment, reconciliation, and financial due diligence.",
+  "inputSchema": {
+    "type": "object",
+    "properties": {
+      "account_id": {
+        "type": "string",
+        "description": "Optional bank account ID to query. If omitted, returns data for the first available account."
+      },
+      "limit": {
+        "type": "number",
+        "description": "Number of transactions to return. Defaults to 10. Maximum 100."
+      },
+      "from_date": {
+        "type": "string",
+        "description": "Optional start date for transaction history in ISO format e.g. 2026-01-01"
+      }
+    },
+    "required": []
+  },
+  "outputSchema": {
+    "type": "object",
+    "properties": {
+      "account_id": { "type": "string" },
+      "account_name": { "type": "string" },
+      "currency": { "type": "string" },
+      "balance": { "type": "number" },
+      "transactions": { "type": "array" },
+      "total_returned": { "type": "number" },
+      "timestamp": { "type": "string" }
+    }
+  }
+}

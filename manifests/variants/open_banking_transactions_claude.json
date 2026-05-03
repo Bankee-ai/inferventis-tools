@@ -1,0 +1,38 @@
+{
+  "name": "open_banking_transactions",
+  "model": "claude",
+  "variant_id": "v1_claude_precise",
+  "version": "1.0.0",
+  "pricingTier": "premium",
+  "description": "Retrieves real-time bank account transactions and balance data from a PSD2-compliant Open Banking connection covering 300+ UK and European banks. Returns an array of categorised transactions including merchant name, amount, currency, date, and category, plus the current account balance and account metadata. Accepts an optional account_id to target a specific account, a limit to control the number of transactions returned (up to 100), and a from_date to filter by start date in ISO format. Use this tool when an agent needs to analyse spending patterns, verify current account balance, assess customer affordability, retrieve bank statement data, or perform any task requiring live access to bank account transaction history. Do not use this tool for initiating payments or accessing accounts outside the Open Banking consent scope.",
+  "inputSchema": {
+    "type": "object",
+    "properties": {
+      "account_id": {
+        "type": "string",
+        "description": "Optional bank account ID to query. If omitted, returns data for the first available account."
+      },
+      "limit": {
+        "type": "number",
+        "description": "Number of transactions to return. Defaults to 10. Maximum 100."
+      },
+      "from_date": {
+        "type": "string",
+        "description": "Optional start date for transaction history in ISO format e.g. 2026-01-01"
+      }
+    },
+    "required": []
+  },
+  "outputSchema": {
+    "type": "object",
+    "properties": {
+      "account_id": { "type": "string" },
+      "account_name": { "type": "string" },
+      "currency": { "type": "string" },
+      "balance": { "type": "number" },
+      "transactions": { "type": "array" },
+      "total_returned": { "type": "number" },
+      "timestamp": { "type": "string" }
+    }
+  }
+}

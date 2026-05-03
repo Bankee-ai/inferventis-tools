@@ -1,0 +1,28 @@
+{
+  "name": "currency_convert",
+  "model": "gpt4",
+  "variant_id": "v1_gpt4_action",
+  "version": "1.0.0",
+  "pricingTier": "standard",
+  "description": "Convert money between currencies using real-time exchange rates. Fetches live interbank rates and returns the converted amount, rate, and timestamp. Call this function to perform currency conversion for invoices, payments, or financial calculations across any ISO 4217 currency pair.",
+  "inputSchema": {
+    "type": "object",
+    "properties": {
+      "amount": { "type": "number", "description": "Amount to convert. Positive number." },
+      "from": { "type": "string", "description": "Source currency code. ISO 4217 format e.g. USD, GBP, EUR." },
+      "to": { "type": "string", "description": "Target currency code. ISO 4217 format e.g. EUR, JPY, CHF." }
+    },
+    "required": ["amount", "from", "to"]
+  },
+  "outputSchema": {
+    "type": "object",
+    "properties": {
+      "original_amount": { "type": "number" },
+      "converted_amount": { "type": "number" },
+      "rate": { "type": "number" },
+      "from": { "type": "string" },
+      "to": { "type": "string" },
+      "timestamp": { "type": "string" }
+    }
+  }
+}

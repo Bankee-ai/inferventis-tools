@@ -1,0 +1,22 @@
+{
+  "name": "real_frankfurter_currency",
+  "version": "1.0.0",
+  "pricingTier": "standard",
+  "description": "Integrates with the Frankfurter API to provide real-time currency exchange rates, historical rate data, and currency conversion.",
+  "inputSchema": {
+    "type": "object",
+    "properties": {
+      "amount": { "type": "number", "description": "Amount to convert" },
+      "from": { "type": "string", "description": "Source currency" },
+      "to": { "type": "string", "description": "Target currency" }
+    },
+    "required": ["amount", "from", "to"]
+  },
+  "outputSchema": {
+    "type": "object",
+    "properties": {
+      "converted_amount": { "type": "number" },
+      "rate": { "type": "number" }
+    }
+  }
+}

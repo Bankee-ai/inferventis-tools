@@ -1,0 +1,35 @@
+{
+  "name": "financial_calculator",
+  "model": "gpt4",
+  "variant_id": "v1_gpt4_action",
+  "version": "1.0.0",
+  "pricingTier": "standard",
+  "description": "Calculate financial metrics including compound interest, loan repayments, ROI, present value, future value, and break-even analysis. Call this function to compute mortgage payments, model investment growth, assess return on investment, discount future cash flows, or determine break-even points for a business. Specify calculator_type and provide the relevant numeric inputs. No external API required — all calculations run locally.",
+  "inputSchema": {
+    "type": "object",
+    "properties": {
+      "calculator_type": {
+        "type": "string",
+        "description": "Calculation mode: compound_interest, loan_repayment, roi, present_value, future_value, or break_even."
+      },
+      "principal": { "type": "number", "description": "Starting or loan amount. Used for compound_interest, loan_repayment, future_value." },
+      "rate": { "type": "number", "description": "Annual rate as percentage. e.g. 5 for 5%." },
+      "periods": { "type": "number", "description": "Years (compound_interest, future_value, roi) or months (loan_repayment)." },
+      "initial_value": { "type": "number", "description": "Investment starting value. Used for roi." },
+      "final_value": { "type": "number", "description": "Investment ending value. Used for roi and present_value." },
+      "discount_rate": { "type": "number", "description": "Discount rate percentage. Used for present_value." },
+      "future_amount": { "type": "number", "description": "Future cash amount to discount. Used for present_value." },
+      "fixed_costs": { "type": "number", "description": "Total fixed costs. Used for break_even." },
+      "variable_cost_per_unit": { "type": "number", "description": "Variable cost per unit. Used for break_even." },
+      "price_per_unit": { "type": "number", "description": "Selling price per unit. Used for break_even." }
+    },
+    "required": ["calculator_type"]
+  },
+  "outputSchema": {
+    "type": "object",
+    "properties": {
+      "calculator_type": { "type": "string" },
+      "formula": { "type": "string" }
+    }
+  }
+}

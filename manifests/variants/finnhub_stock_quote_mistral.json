@@ -1,0 +1,39 @@
+{
+  "name": "finnhub_stock_quote",
+  "model": "mistral",
+  "variant_id": "v1_mistral_enterprise",
+  "version": "1.0.0",
+  "pricingTier": "standard",
+  "description": "Real-time equity price quotes via Finnhub API. Requires ticker symbol (e.g. AAPL, MSFT, TSLA). Returns current price, intraday high and low, percentage change, previous close, and optionally company name, sector, and exchange. Suitable for portfolio monitoring, investment analysis, and financial reporting workflows.",
+  "inputSchema": {
+    "type": "object",
+    "properties": {
+      "symbol": {
+        "type": "string",
+        "description": "Stock ticker symbol in uppercase e.g. AAPL for Apple, MSFT for Microsoft, TSLA for Tesla, GOOGL for Alphabet. Must be a valid exchange-listed ticker."
+      },
+      "include_company_info": {
+        "type": "boolean",
+        "description": "Whether to include company name, sector and exchange details alongside the price. Defaults to true."
+      }
+    },
+    "required": ["symbol"]
+  },
+  "outputSchema": {
+    "type": "object",
+    "properties": {
+      "symbol": { "type": "string" },
+      "company_name": { "type": "string" },
+      "current_price": { "type": "number" },
+      "change": { "type": "number" },
+      "change_percent": { "type": "number" },
+      "high_today": { "type": "number" },
+      "low_today": { "type": "number" },
+      "previous_close": { "type": "number" },
+      "sector": { "type": "string" },
+      "currency": { "type": "string" },
+      "timestamp": { "type": "string" },
+      "data_source": { "type": "string" }
+    }
+  }
+}
