@@ -1,14 +1,14 @@
 {
   "name": "financial_calculator",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "pricingTier": "standard",
-  "description": "Performs precise financial calculations across six calculation types. compound_interest computes the final value and total interest earned on a principal over time at a given annual rate. loan_repayment calculates the monthly payment, total repayable amount, and total interest for a mortgage or loan given the loan amount, annual rate, and term in months. roi returns return on investment as a percentage and absolute profit or loss, with optional annualised ROI when a holding period is provided. present_value discounts a future cash amount back to its current value using a discount rate. future_value projects a present amount forward at a compounding annual rate. break_even finds the unit volume and revenue at which fixed and variable costs are fully covered by sales. All calculations are performed locally with no external API dependency.",
+  "description": "Performs precise financial calculations across six calculation types entirely locally with no external API dependency. compound_interest computes the final value and total interest earned on a principal over time at a given annual rate. loan_repayment calculates the monthly payment, total repayable amount, and total interest for a mortgage or loan given the principal, annual rate, and term in months. roi returns return on investment as a percentage and absolute profit or loss, with optional annualised ROI when a holding period is provided. present_value discounts a future cash amount back to its current value using a discount rate. future_value projects a present amount forward at a compounding annual rate. break_even finds the unit volume and revenue at which fixed and variable costs are fully covered by sales. Use this tool when an agent needs to perform any structured financial calculation — loan affordability, investment return, discounted cash flow, or cost analysis. Do not use this tool to fetch live market prices or exchange rates — use finnhub_stock_quote for stock prices, crypto_price for cryptocurrency prices, or currency_convert for FX rates.",
   "inputSchema": {
     "type": "object",
     "properties": {
       "calculator_type": {
         "type": "string",
-        "description": "The type of financial calculation to perform. One of: compound_interest, loan_repayment, roi, present_value, future_value, break_even."
+        "description": "The type of financial calculation to perform. Must be one of: compound_interest, loan_repayment, roi, present_value, future_value, break_even."
       },
       "principal": {
         "type": "number",
@@ -56,8 +56,10 @@
   "outputSchema": {
     "type": "object",
     "properties": {
-      "calculator_type": { "type": "string" },
-      "formula": { "type": "string" }
+      "calculator_type": { "type": "string", "description": "The calculation type that was performed." },
+      "formula": { "type": "string", "description": "Human-readable formula or breakdown of the calculation result, including all key output figures." },
+      "result": { "type": "number", "description": "Primary numeric result of the calculation (e.g. monthly payment for loan_repayment, final value for compound_interest)." },
+      "breakdown": { "type": "object", "description": "Additional output figures specific to the calculator type, e.g. total_interest, total_repayable, annualised_roi." }
     }
   }
 }

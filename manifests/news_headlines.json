@@ -1,22 +1,22 @@
 {
   "name": "news_headlines",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "pricingTier": "free",
-  "description": "Retrieves the latest real-time news headlines and article summaries from BBC News and The Guardian across multiple topic categories. Use this tool when an agent needs current news about a specific topic, wants to summarise today's headlines, needs to research recent events, monitor a subject area for new developments, or build a news briefing. Supports filtering by topic category (technology, business, science, health, politics, sport, AI, world, general) and optional keyword search within results. Returns structured articles with headline, description, source name, article URL, and publication date — sorted by most recent first. No API key required. Data sourced directly from BBC News and The Guardian public RSS feeds.",
+  "description": "Retrieves the latest real-time news headlines and article summaries from BBC News and The Guardian across nine topic categories. Returns structured articles with headline, description, source name, article URL, and publication date — sorted most recent first. No API key required. Use this tool when an agent needs current news about a specific topic, wants to summarise today's headlines, needs to research recent events, monitor a subject area for new developments, or build a news briefing. Do not use this tool to read the full content of a specific article — use url_reader instead, passing the article URL returned by this tool. Do not use when news from sources outside BBC News and The Guardian is required.",
   "inputSchema": {
     "type": "object",
     "properties": {
       "topic": {
         "type": "string",
-        "description": "News topic category to retrieve headlines for. Accepted values: 'general' (top stories across all categories), 'technology' (tech industry and digital news), 'business' (markets, economy, and corporate news), 'science' (research, environment, and discoveries), 'health' (medical and public health news), 'politics' (government and political news), 'sport' (sports and athletics), 'ai' (artificial intelligence and machine learning news), 'world' (international and global news). Defaults to 'general' if not specified or if an unrecognised value is provided."
+        "description": "News topic category to retrieve headlines for. Accepted values: 'general' (top stories across all categories), 'technology' (tech industry and digital news), 'business' (markets, economy, and corporate news), 'science' (research, environment, and discoveries), 'health' (medical and public health news), 'politics' (government and political news), 'sport' (sports and athletics), 'ai' (artificial intelligence and machine learning news), 'world' (international and global news). Defaults to 'general' if omitted or unrecognised."
       },
       "keyword": {
         "type": "string",
-        "description": "Optional search keyword to filter headlines. Only articles whose title or description contains this keyword will be returned. Case-insensitive. Example: 'OpenAI', 'interest rates', 'climate change'. Leave empty to return all headlines for the chosen topic."
+        "description": "Optional search keyword to filter headlines. Only articles whose title or description contains this keyword will be returned. Case-insensitive. Examples: 'OpenAI', 'interest rates', 'climate change'. Omit to return all headlines for the chosen topic."
       },
       "limit": {
         "type": "number",
-        "description": "Maximum number of articles to return. Defaults to 10. Minimum 1, maximum 20. Use a lower number for a quick briefing and a higher number for comprehensive coverage."
+        "description": "Maximum number of articles to return. Integer between 1 and 20. Defaults to 10. Use a lower number for a quick briefing and a higher number for comprehensive coverage."
       }
     },
     "required": []
@@ -24,25 +24,15 @@
   "outputSchema": {
     "type": "object",
     "properties": {
-      "topic": { "type": "string", "description": "The topic category that was queried" },
-      "keyword": { "type": "string", "description": "The keyword filter that was applied, or null if none" },
-      "article_count": { "type": "number", "description": "Number of articles returned" },
+      "topic": { "type": "string", "description": "The topic category that was queried." },
+      "keyword": { "type": "string", "description": "The keyword filter that was applied, or null if none." },
+      "article_count": { "type": "number", "description": "Number of articles returned." },
       "articles": {
         "type": "array",
-        "description": "List of news articles sorted by publication date descending (most recent first)",
-        "items": {
-          "type": "object",
-          "properties": {
-            "title": { "type": "string", "description": "Article headline" },
-            "description": { "type": "string", "description": "Article summary or excerpt" },
-            "url": { "type": "string", "description": "Direct link to the full article" },
-            "source": { "type": "string", "description": "Name of the news source (BBC News or The Guardian)" },
-            "published_at": { "type": "string", "description": "ISO 8601 publication timestamp" }
-          }
-        }
+        "description": "List of news articles sorted by publication date descending (most recent first). Each item contains: title (headline), description (excerpt or summary), url (link to full article), source (BBC News or The Guardian), published_at (ISO 8601 timestamp)."
       },
-      "fetched_at": { "type": "string", "description": "ISO 8601 timestamp of when headlines were fetched" },
-      "sources": { "type": "array", "description": "List of RSS feed sources consulted" }
+      "fetched_at": { "type": "string", "description": "ISO 8601 timestamp of when headlines were fetched." },
+      "sources": { "type": "array", "description": "List of RSS feed sources consulted to build this response." }
     }
   }
 }

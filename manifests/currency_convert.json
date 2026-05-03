@@ -1,22 +1,22 @@
 {
   "name": "currency_convert",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "pricingTier": "standard",
-  "description": "Converts a monetary amount from one currency to another using live exchange rates. Accepts any ISO 4217 currency code pair (e.g. USD to EUR, GBP to JPY). Returns the converted amount, the exchange rate applied, and the timestamp of the rate. Use this tool when an agent needs to convert prices, invoices, payments, or financial figures between currencies in real time.",
+  "description": "Converts a monetary amount from one currency to another using live exchange rates sourced from the Frankfurter API (European Central Bank data). Returns the converted amount, the exact exchange rate applied, and the timestamp of the rate. Supports 30+ currencies including USD, EUR, GBP, JPY, CHF, AUD, CAD, SEK, NOK, DKK, SGD, HKD, and all major ISO 4217 codes. Use this tool when an agent needs to convert prices, invoices, salaries, payments, or any financial figure between fiat currencies in real time. Do not use this tool for cryptocurrency conversion — use crypto_price instead, which supports BTC, ETH, and 10,000+ digital assets. Do not use when a historical rate on a specific past date is required — this tool returns the current live rate only.",
   "inputSchema": {
     "type": "object",
     "properties": {
       "amount": {
         "type": "number",
-        "description": "The monetary amount to convert. Must be a positive number."
+        "description": "The monetary amount to convert. Must be a positive number. Decimals are supported. Example: 1500.50 to convert one thousand five hundred and fifty cents."
       },
       "from": {
         "type": "string",
-        "description": "The source currency code in ISO 4217 format e.g. USD, GBP, EUR"
+        "description": "The source currency code in ISO 4217 format. Must be uppercase. Examples: USD, GBP, EUR, JPY, CHF, AUD, CAD."
       },
       "to": {
         "type": "string",
-        "description": "The target currency code in ISO 4217 format e.g. EUR, JPY, CHF"
+        "description": "The target currency code in ISO 4217 format. Must be uppercase. Examples: EUR, JPY, CHF, SGD, HKD, SEK."
       }
     },
     "required": ["amount", "from", "to"]
@@ -24,13 +24,13 @@
   "outputSchema": {
     "type": "object",
     "properties": {
-      "original_amount": { "type": "number" },
-      "converted_amount": { "type": "number" },
-      "rate": { "type": "number" },
-      "from": { "type": "string" },
-      "to": { "type": "string" },
-      "timestamp": { "type": "string" },
-      "source": { "type": "string" }
+      "original_amount": { "type": "number", "description": "The input amount provided by the caller." },
+      "converted_amount": { "type": "number", "description": "The result of the conversion in the target currency, rounded to 4 decimal places." },
+      "rate": { "type": "number", "description": "The exchange rate applied: how many units of the target currency equal one unit of the source currency." },
+      "from": { "type": "string", "description": "The source currency ISO 4217 code." },
+      "to": { "type": "string", "description": "The target currency ISO 4217 code." },
+      "timestamp": { "type": "string", "description": "ISO 8601 timestamp of when the exchange rate was fetched." },
+      "source": { "type": "string", "description": "Data source name, always 'Frankfurter / European Central Bank'." }
     }
   }
 }

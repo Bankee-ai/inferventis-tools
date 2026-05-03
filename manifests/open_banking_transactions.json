@@ -1,22 +1,22 @@
 {
   "name": "open_banking_transactions",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "pricingTier": "premium",
-  "description": "Retrieves real-time bank account transaction history and balance data via Open Banking APIs. Connects to 300+ UK and European banks through a regulated PSD2-compliant data layer. Returns categorised transactions, merchant names, amounts, and current balance for a given account. Use this tool when an agent needs to analyse spending patterns, verify account balances, assess affordability, retrieve financial history, or process any task requiring access to live bank account data.",
+  "description": "Retrieves bank account balances and transaction history via PSD2 Open Banking (TrueLayer), covering 300+ UK and European banks. Returns the account balance, ISO 4217 currency code, and up to 100 recent transactions — each with date, merchant description, amount, and category. Supports optional date filtering to narrow the transaction window. Use this tool when an agent needs to inspect a user's spending history, verify a payment has cleared, assess account affordability, categorise recent bank transactions, or produce a financial summary from live bank data. Do not use for payment initiation — this tool is strictly read-only. Do not use for Stripe-specific payment records, subscription billing, or failed charge investigation — use stripe_payments instead. Requires a TrueLayer access token; returns structured mock data if no token is configured.",
   "inputSchema": {
     "type": "object",
     "properties": {
       "account_id": {
         "type": "string",
-        "description": "Optional bank account ID to query. If omitted, returns data for the first available account."
+        "description": "TrueLayer account ID to retrieve transactions for. Obtain from a prior account-listing call. Omit to return data for the first connected account."
       },
       "limit": {
         "type": "number",
-        "description": "Number of transactions to return. Defaults to 10. Maximum 100."
+        "description": "Maximum number of transactions to return. Integer between 1 and 100. Defaults to 10."
       },
       "from_date": {
         "type": "string",
-        "description": "Optional start date for transaction history in ISO format e.g. 2026-01-01"
+        "description": "Optional start date for filtering transactions. ISO 8601 date format: YYYY-MM-DD. Example: 2026-01-01 to retrieve transactions from 1 January 2026 onwards."
       }
     },
     "required": []
@@ -24,13 +24,14 @@
   "outputSchema": {
     "type": "object",
     "properties": {
-      "account_id": { "type": "string" },
-      "account_name": { "type": "string" },
-      "currency": { "type": "string" },
-      "balance": { "type": "number" },
-      "transactions": { "type": "array" },
-      "total_returned": { "type": "number" },
-      "timestamp": { "type": "string" }
+      "account_id": { "type": "string", "description": "The account ID transactions were fetched for." },
+      "account_name": { "type": "string", "description": "Human-readable account name or label from the bank." },
+      "currency": { "type": "string", "description": "ISO 4217 currency code for all monetary amounts, e.g. GBP, EUR." },
+      "balance": { "type": "number", "description": "Current account balance in the account's currency." },
+      "transactions": { "type": "array", "description": "Array of transaction objects sorted most recent first. Each item includes: date (ISO 8601), description (merchant name or reference), amount (positive for credits, negative for debits), and category." },
+      "total_returned": { "type": "number", "description": "Number of transactions included in this response." },
+      "data_source": { "type": "string", "description": "'live' if a TrueLayer token is configured, 'mock' if returning demonstration data." },
+      "timestamp": { "type": "string", "description": "ISO 8601 timestamp of when the data was fetched." }
     }
   }
 }
