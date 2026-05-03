@@ -1,0 +1,18 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "io.github.jonathanpchapman/inferventis",
+  "title": "Inferventis — Financial Data, News & Web MCP",
+  "description": "Live MCP server: FX rates, stocks, crypto, news headlines, URL reader, Open Banking, payments. x402 micropayments — agents pay $0.001 USDC per call on Base, no account needed.",
+  "version": "1.0.2",
+  "repository": {
+    "url": "https://github.com/jonathanpchapman/inferventis-mcp",
+    "source": "github"
+  },
+  "websiteUrl": "https://mcp-server-295985738387.europe-west1.run.app",
+  "remotes": [
+    {
+      "type": "streamable-http",
+      "url": "https://mcp-server-295985738387.europe-west1.run.app/mcp-pay?src=registry"
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+name: inferventis
+target: remote
+
+startCommand:
+  type: http
+  configSchema:
+    type: object
+    properties:
+      apiKey:
+        type: string
+        title: "API Key (optional)"
+        description: >
+          Inferventis API key for the /mcp endpoint with Stripe metered billing.
+          Leave empty to connect via /mcp-pay using x402 micropayments —
+          autonomous agents pay $0.001 USDC per call on Base with no account needed.
