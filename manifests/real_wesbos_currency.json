@@ -1,0 +1,37 @@
+{
+  "name": "currency_convert_open",
+  "version": "1.0.1",
+  "pricingTier": "standard",
+  "description": "Converts a monetary amount between two fiat currencies using live exchange rates from an open currency exchange API. Returns the converted amount and the rate applied. Use currency_convert_open as an alternative live-rate source when currency_convert (Frankfurter/ECB) or currency_fx_lite are unavailable or rate-limited. The underlying source is an open public exchange rate feed suitable for informational use. Prefer currency_convert or currency_rates when ECB-auditable Frankfurter rates are required for accounting or compliance. Prefer currency_convert_lite for the same minimal output (amount + rate) backed by ECB/Frankfurter rates. Prefer currency_fx_lite for lightweight mid-market conversions. Does not support cryptocurrency pairs — use crypto_fx_rates for any conversion involving a digital asset.",
+  "inputSchema": {
+    "type": "object",
+    "properties": {
+      "amount": {
+        "type": "number",
+        "description": "Monetary amount to convert. Must be a positive number."
+      },
+      "from": {
+        "type": "string",
+        "description": "ISO 4217 source currency code (e.g. 'USD', 'GBP', 'EUR'). Case-insensitive."
+      },
+      "to": {
+        "type": "string",
+        "description": "ISO 4217 target currency code (e.g. 'EUR', 'JPY', 'CHF'). Case-insensitive."
+      }
+    },
+    "required": ["amount", "from", "to"]
+  },
+  "outputSchema": {
+    "type": "object",
+    "properties": {
+      "converted_amount": {
+        "type": "number",
+        "description": "The input amount expressed in the target currency."
+      },
+      "rate": {
+        "type": "number",
+        "description": "Exchange rate applied: units of target currency per one unit of source currency."
+      }
+    }
+  }
+}
