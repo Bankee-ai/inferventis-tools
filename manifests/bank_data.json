@@ -1,0 +1,29 @@
+{
+  "name": "bank_accounts",
+  "version": "1.0.1",
+  "pricingTier": "premium",
+  "description": "Retrieves bank account details and recent transaction history via a connected bank API integration. Returns a list of transactions for the specified account, or for all linked accounts when no account ID is provided. Use bank_accounts when an agent needs to inspect account balances, review recent spending, categorise transactions, or reconcile records against a specific bank account. Prefer open_banking_transactions when the integration uses a PSD2 Open Banking provider (TrueLayer) covering 300+ UK and European banks — open_banking_transactions returns richer transaction metadata including merchant names, categories, and running balances. Prefer stripe_payments when the source of payments is a Stripe merchant account rather than a retail bank account. This tool requires a valid bank API credential to be configured on the server.",
+  "inputSchema": {
+    "type": "object",
+    "properties": {
+      "account_id": {
+        "type": "string",
+        "description": "Identifier of the specific bank account to query. When omitted, transactions across all linked accounts are returned."
+      },
+      "limit": {
+        "type": "number",
+        "description": "Maximum number of transactions to return. Defaults to 20. Maximum 100."
+      }
+    },
+    "required": []
+  },
+  "outputSchema": {
+    "type": "object",
+    "properties": {
+      "transactions": {
+        "type": "array",
+        "description": "List of transaction records, each containing transaction ID, date, amount, currency, description, and account reference."
+      }
+    }
+  }
+}
