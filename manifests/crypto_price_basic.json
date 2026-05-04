@@ -1,0 +1,30 @@
+{
+  "name": "crypto_price_lite",
+  "version": "1.0.1",
+  "pricingTier": "standard",
+  "description": "Retrieves the current spot price and 24-hour change for any cryptocurrency using the CoinGecko public API. Returns price, percentage change, and a timestamp. This is a lightweight variant of crypto_price that omits extended market data (market cap, volume) — use it when only the raw price and 24h direction are needed. Prefer crypto_price when the agent also needs market capitalisation, trading volume, or richer structured output. Use crypto_fx_rates when converting a specific amount between a cryptocurrency and fiat (e.g. 'convert 0.5 BTC to USD') rather than looking up a spot price. Supports all major coins including BTC, ETH, SOL, XRP, ADA, DOGE, and 10,000+ CoinGecko-listed assets. Accepts ticker symbols (BTC, ETH) or full names (bitcoin, ethereum). Target currency defaults to USD but accepts any ISO 4217 code.",
+  "inputSchema": {
+    "type": "object",
+    "properties": {
+      "coin": {
+        "type": "string",
+        "description": "Cryptocurrency ticker symbol (BTC, ETH, SOL) or full CoinGecko name (bitcoin, ethereum, solana). Case-insensitive."
+      },
+      "currency": {
+        "type": "string",
+        "description": "ISO 4217 fiat currency code for the returned price. Defaults to 'usd'. Examples: usd, eur, gbp, jpy."
+      }
+    },
+    "required": ["coin"]
+  },
+  "outputSchema": {
+    "type": "object",
+    "properties": {
+      "coin": { "type": "string", "description": "Coin identifier as provided." },
+      "price": { "type": "number", "description": "Current spot price in the requested fiat currency." },
+      "change_24h": { "type": "number", "description": "Percentage price change over the last 24 hours. Negative values indicate a decline." },
+      "currency": { "type": "string", "description": "ISO 4217 code of the currency prices are expressed in." },
+      "fetched_at": { "type": "string", "description": "ISO 8601 timestamp of when the price was fetched." }
+    }
+  }
+}
