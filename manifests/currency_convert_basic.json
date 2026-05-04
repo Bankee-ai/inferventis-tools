@@ -1,0 +1,37 @@
+{
+  "name": "currency_convert_lite",
+  "version": "1.0.1",
+  "pricingTier": "standard",
+  "description": "Converts a monetary amount between any two fiat currencies using live exchange rates from the Frankfurter API (European Central Bank data). Returns the converted amount and the exchange rate applied. This is a lightweight variant of currency_convert — minimal response without rate timestamp or source attribution. Use currency_convert_lite when only the converted value and rate are needed and ECB/Frankfurter-sourced rates are preferred. Prefer currency_convert when the agent also needs rate timestamp and richer structured output. Prefer currency_fx_lite for the same minimal output (amount + rate) when the ECB data source is not specifically required — both return identical fields but draw from different rate providers. Use currency_rates when a historical rate from a specific past date is required (e.g. accounting, tax, or audit). Use currency_convert_open as a fallback when Frankfurter is unavailable or rate-limited. Does not support cryptocurrency pairs — use crypto_price or crypto_fx_rates for crypto-to-fiat conversions. Accepts all major ISO 4217 currency codes (USD, EUR, GBP, JPY, CHF, AUD, CAD, SGD, NOK, SEK, DKK, PLN, CZK, HUF, etc.).",
+  "inputSchema": {
+    "type": "object",
+    "properties": {
+      "amount": {
+        "type": "number",
+        "description": "Monetary amount to convert. Must be a positive number."
+      },
+      "from": {
+        "type": "string",
+        "description": "ISO 4217 code of the source currency (e.g. 'USD', 'GBP', 'EUR'). Case-insensitive."
+      },
+      "to": {
+        "type": "string",
+        "description": "ISO 4217 code of the target currency (e.g. 'EUR', 'JPY', 'CHF'). Case-insensitive."
+      }
+    },
+    "required": ["amount", "from", "to"]
+  },
+  "outputSchema": {
+    "type": "object",
+    "properties": {
+      "converted_amount": {
+        "type": "number",
+        "description": "The input amount expressed in the target currency after applying the live exchange rate."
+      },
+      "rate": {
+        "type": "number",
+        "description": "Exchange rate applied: how many units of the target currency equal one unit of the source currency."
+      }
+    }
+  }
+}
