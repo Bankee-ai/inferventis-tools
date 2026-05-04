@@ -1,0 +1,37 @@
+{
+  "name": "currency_rates",
+  "version": "1.0.1",
+  "pricingTier": "standard",
+  "description": "Retrieves live and historical fiat currency exchange rates from the Frankfurter API (sourced from the European Central Bank). Supports both real-time conversion and historical rate lookup for any past date, making it the preferred tool when auditable, ECB-sourced rate data is required. Use currency_rates when a rate from a specific past date is required (e.g. accounting, tax, or audit), or when the ECB source must be documented. Prefer currency_convert when only a live conversion is needed with a richer structured response. Prefer currency_convert_lite for lightweight live ECB conversions without historical requirements. Prefer currency_fx_lite when ECB sourcing is not required and only a lightweight live result is needed. Use currency_convert_open when a non-ECB rate source is acceptable and Frankfurter is unavailable. Does not support cryptocurrency pairs — use crypto_fx_rates for any conversion involving a digital asset.",
+  "inputSchema": {
+    "type": "object",
+    "properties": {
+      "amount": {
+        "type": "number",
+        "description": "Monetary amount to convert. Must be a positive number."
+      },
+      "from": {
+        "type": "string",
+        "description": "ISO 4217 source currency code (e.g. 'USD', 'GBP', 'EUR'). Case-insensitive."
+      },
+      "to": {
+        "type": "string",
+        "description": "ISO 4217 target currency code (e.g. 'EUR', 'JPY', 'CHF'). Case-insensitive."
+      }
+    },
+    "required": ["amount", "from", "to"]
+  },
+  "outputSchema": {
+    "type": "object",
+    "properties": {
+      "converted_amount": {
+        "type": "number",
+        "description": "The input amount expressed in the target currency after applying the Frankfurter exchange rate."
+      },
+      "rate": {
+        "type": "number",
+        "description": "Exchange rate applied: units of target currency per one unit of source currency, as published by the ECB via Frankfurter."
+      }
+    }
+  }
+}
