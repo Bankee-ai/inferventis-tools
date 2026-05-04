@@ -1,0 +1,37 @@
+{
+  "name": "crypto_fx_rates",
+  "version": "1.0.1",
+  "pricingTier": "standard",
+  "description": "Converts an amount between any cryptocurrency and fiat currency pair, or between two cryptocurrencies, using real-time exchange rates sourced from CoinAPI. Supports all crypto-to-fiat (BTC/USD, ETH/EUR), fiat-to-crypto (USD/BTC), and cross-crypto (BTC/ETH) conversions. Use crypto_fx_rates when the conversion involves at least one cryptocurrency and a specific amount must be converted. Prefer crypto_price when only the spot price of a coin in fiat is needed without converting a specific amount, or prefer crypto_price_lite for the same spot price with a minimal response schema. Prefer currency_convert or currency_fx_lite when both currencies are fiat — those tools use ECB/Frankfurter or mid-market rates and do not consume a CoinAPI quota. Requires a CoinAPI key to be configured on the server.",
+  "inputSchema": {
+    "type": "object",
+    "properties": {
+      "amount": {
+        "type": "number",
+        "description": "Amount to convert. Must be a positive number. Denominated in the 'from' currency."
+      },
+      "from": {
+        "type": "string",
+        "description": "Source currency code. Accepts ISO 4217 fiat codes (USD, EUR, GBP) or cryptocurrency ticker symbols (BTC, ETH, SOL, XRP). Case-insensitive."
+      },
+      "to": {
+        "type": "string",
+        "description": "Target currency code. Accepts ISO 4217 fiat codes (USD, EUR, GBP) or cryptocurrency ticker symbols (BTC, ETH, SOL, XRP). Case-insensitive."
+      }
+    },
+    "required": ["amount", "from", "to"]
+  },
+  "outputSchema": {
+    "type": "object",
+    "properties": {
+      "converted_amount": {
+        "type": "number",
+        "description": "The input amount expressed in the target currency after applying the live CoinAPI exchange rate."
+      },
+      "rate": {
+        "type": "number",
+        "description": "Exchange rate applied: units of the target currency per one unit of the source currency."
+      }
+    }
+  }
+}
