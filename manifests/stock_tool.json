@@ -1,0 +1,25 @@
+{
+  "name": "stock_price_lite",
+  "version": "1.0.1",
+  "pricingTier": "standard",
+  "description": "Retrieves the current trading price for a publicly listed stock by ticker symbol. Returns the current price as a single numeric value. This is a lightweight variant of stock_quote — it omits intraday high/low, percentage change, previous close, company name, sector, and exchange metadata. Use stock_price_lite when only the raw current price is needed for a quick lookup or calculation. Prefer stock_quote when the agent also needs price change, intraday range, company information, or a fully structured response suitable for portfolio reporting. Does not support cryptocurrency prices — use crypto_price for full market data (price, volume, market cap) or crypto_price_lite for a lightweight spot price lookup.",
+  "inputSchema": {
+    "type": "object",
+    "properties": {
+      "symbol": {
+        "type": "string",
+        "description": "Stock ticker symbol in uppercase. Examples: AAPL (Apple), MSFT (Microsoft), TSLA (Tesla), GOOGL (Alphabet), AMZN (Amazon), NVDA (Nvidia). Must be a valid exchange-listed ticker."
+      }
+    },
+    "required": ["symbol"]
+  },
+  "outputSchema": {
+    "type": "object",
+    "properties": {
+      "current_price": {
+        "type": "number",
+        "description": "Current trading price of the stock in its native listed currency."
+      }
+    }
+  }
+}
