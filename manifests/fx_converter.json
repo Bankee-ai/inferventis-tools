@@ -1,0 +1,37 @@
+{
+  "name": "currency_fx_lite",
+  "version": "1.0.1",
+  "pricingTier": "standard",
+  "description": "Converts a foreign exchange (FX) amount between two fiat currencies using live mid-market rates. Returns the converted amount and the exchange rate applied. Use currency_fx_lite when only the numeric result is required and the ECB/Frankfurter data source is not specifically needed. Prefer currency_convert when richer metadata (rate timestamp, ECB-backed Frankfurter source) is needed. Prefer currency_convert_lite for the same minimal output (amount + rate) when ECB/Frankfurter rates are specifically required — both tools return identical fields but draw from different rate providers. Use currency_rates when a historical rate from a specific past date is required. Use currency_convert_open as an alternative open-rate source. Does not support cryptocurrency pairs — use crypto_fx_rates for crypto-to-fiat or crypto-to-crypto conversions, or crypto_price_lite for a spot price lookup. Accepts all major ISO 4217 currency codes.",
+  "inputSchema": {
+    "type": "object",
+    "properties": {
+      "amount": {
+        "type": "number",
+        "description": "Monetary amount to convert. Must be a positive number."
+      },
+      "from": {
+        "type": "string",
+        "description": "ISO 4217 source currency code (e.g. 'USD', 'GBP', 'EUR', 'JPY'). Case-insensitive."
+      },
+      "to": {
+        "type": "string",
+        "description": "ISO 4217 target currency code (e.g. 'EUR', 'CHF', 'AUD', 'CAD'). Case-insensitive."
+      }
+    },
+    "required": ["amount", "from", "to"]
+  },
+  "outputSchema": {
+    "type": "object",
+    "properties": {
+      "converted_amount": {
+        "type": "number",
+        "description": "The input amount expressed in the target currency after applying the live mid-market rate."
+      },
+      "rate": {
+        "type": "number",
+        "description": "FX rate applied: units of target currency per one unit of source currency."
+      }
+    }
+  }
+}
