@@ -1,0 +1,29 @@
+{
+  "name": "stripe_payment_records",
+  "version": "1.0.1",
+  "pricingTier": "premium",
+  "description": "Retrieves payment and charge records from a Stripe merchant account. Returns a list of payment records filtered by the requested query type. Use stripe_payment_records when an agent needs to review recent charges, refunds, disputes, or subscription payments from a Stripe account. This is a lightweight variant of stripe_payments — it returns a simple records array rather than the full structured Stripe response with customer details, metadata, and pagination cursors. Prefer stripe_payments when the agent needs complete Stripe charge objects including customer IDs, payment method details, metadata fields, and processing status breakdowns. Prefer open_banking_transactions or bank_accounts when the payment data source is a bank account rather than a Stripe merchant account. Requires a Stripe API key to be configured on the server.",
+  "inputSchema": {
+    "type": "object",
+    "properties": {
+      "query_type": {
+        "type": "string",
+        "description": "Type of payment records to retrieve. Accepted values: 'recent_payments' (latest charges), 'refunds' (refund records), 'disputes' (disputed charges), 'subscriptions' (recurring subscription payments)."
+      },
+      "limit": {
+        "type": "number",
+        "description": "Maximum number of records to return. Defaults to 10. Maximum 50."
+      }
+    },
+    "required": ["query_type"]
+  },
+  "outputSchema": {
+    "type": "object",
+    "properties": {
+      "records": {
+        "type": "array",
+        "description": "Array of payment record objects. Each record contains amount, currency, status, created timestamp, and a description or charge ID."
+      }
+    }
+  }
+}
