@@ -1,0 +1,49 @@
+{
+  "name": "financial_calculator_lite",
+  "version": "1.0.1",
+  "pricingTier": "standard",
+  "description": "Performs common financial calculations locally with no external API dependency. Supports compound interest, loan repayment, return on investment (ROI), present value, future value, and break-even analysis. Returns a single numeric result for the requested calculation type. This is a lightweight variant of financial_calculator — it returns only the result number rather than a full structured breakdown (monthly payment, total interest, annualised ROI, etc.). Use financial_calculator_lite when only the headline figure is needed. Prefer financial_calculator when the agent needs a full breakdown, multiple sub-values, or labelled output fields for compound interest earned, total repayable, or annualised returns. Neither this tool nor financial_calculator fetches live market data — for live prices use stock_quote, crypto_price, or currency_convert.",
+  "inputSchema": {
+    "type": "object",
+    "properties": {
+      "calculator_type": {
+        "type": "string",
+        "description": "Type of calculation to perform. Accepted values: 'compound_interest', 'loan_repayment', 'roi', 'present_value', 'future_value', 'break_even'."
+      },
+      "principal": {
+        "type": "number",
+        "description": "Starting amount or loan principal in currency units. Required for compound_interest, loan_repayment, present_value, and future_value."
+      },
+      "rate": {
+        "type": "number",
+        "description": "Annual interest or discount rate as a decimal (e.g. 0.05 for 5%). Required for compound_interest, loan_repayment, present_value, and future_value."
+      },
+      "periods": {
+        "type": "number",
+        "description": "Number of compounding periods (years) or loan term in months depending on calculator_type. Required for compound_interest, loan_repayment, future_value, and present_value."
+      },
+      "initial_value": {
+        "type": "number",
+        "description": "Initial investment amount. Required for roi calculations."
+      },
+      "final_value": {
+        "type": "number",
+        "description": "Final investment value. Required for roi calculations."
+      }
+    },
+    "required": ["calculator_type"]
+  },
+  "outputSchema": {
+    "type": "object",
+    "properties": {
+      "calculator_type": {
+        "type": "string",
+        "description": "The calculation type that was performed, echoed from input."
+      },
+      "result": {
+        "type": "number",
+        "description": "Headline result of the calculation. For compound_interest: total value. For loan_repayment: monthly payment. For roi: percentage return. For present_value / future_value: discounted or projected value. For break_even: units required."
+      }
+    }
+  }
+}
